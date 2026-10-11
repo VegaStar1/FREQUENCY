@@ -1,0 +1,23 @@
+name: Build FREQUENCY VST3 (Windows)
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -B build -S . -A x64
+      - name: Build VST3
+        run: cmake --build build --config Release --target FREQUENCY_VST3
+      - name: Upload VST3
+        uses: actions/upload-artifact@v4
+        with:
+          name: FREQUENCY-Windows-VST3
+          path: build/FREQUENCY_artefacts/Release/VST3/FREQUENCY.vst3
+          if-no-files-found: error
