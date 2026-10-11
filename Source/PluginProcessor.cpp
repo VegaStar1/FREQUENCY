@@ -43,7 +43,7 @@ void FrequencyAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juc
     const int numOut = getTotalNumOutputChannels();
     for (int ch = 0; ch < getTotalNumInputChannels(); ++ch)
         buffer.clear(ch, 0, numSamples);
-    for (int ch = getTotalInputChannels(); ch < numOut; ++ch)
+    for (int ch = getTotalNumInputChannels(); ch < numOut; ++ch)
         buffer.clear(ch, 0, numSamples);
 
     const int count = stationCount.load(std::memory_order_acquire);
