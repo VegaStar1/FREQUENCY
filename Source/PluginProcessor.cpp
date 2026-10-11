@@ -88,11 +88,11 @@ void FrequencyAudioProcessor::getStateInformation(juce::MemoryBlock& dest)
 {
     juce::XmlElement xml("FREQUENCY_STATE");
     xml.setAttribute("station", selectedStation.load()); xml.setAttribute("tune", (double)tune.load()); xml.setAttribute("noise", (double)noiseAmount.load());
-    juce::copyXmlToBinary(xml, dest);
+    copyXmlToBinary(xml, dest);
 }
 void FrequencyAudioProcessor::setStateInformation(const void* data, int size)
 {
-    std::unique_ptr<juce::XmlElement> xml(juce::getXmlFromBinary(data, size));
+    std::unique_ptr<juce::XmlElement> xml(getXmlFromBinary(data, size));
     if (xml && xml->hasTagName("FREQUENCY_STATE")) {
         tune.store((float)xml->getDoubleAttribute("tune", 0.0)); noiseAmount.store((float)xml->getDoubleAttribute("noise", 0.08));
         selectedStation.store(xml->getIntAttribute("station", -1));
