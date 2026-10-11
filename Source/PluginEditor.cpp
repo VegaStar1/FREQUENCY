@@ -50,7 +50,7 @@ FrequencyAudioProcessorEditor::FrequencyAudioProcessorEditor(FrequencyAudioProce
     loadButton.setColour(juce::TextButton::textColourOffId, amber);
     loadButton.onClick = [this]
     {
-        chooser.launchAsync(juce::FileBrowserComponent::openMode | juce::FileBrowserComponent::canSelectFiles | juce::FileBrowserComponent::canSelectMultiple,
+        chooser.launchAsync(juce::FileBrowserComponent::openMode | juce::FileBrowserComponent::canSelectFiles | juce::FileBrowserComponent::canSelectMultipleItems,
             [this](const juce::FileChooser& fc) {
                 juce::StringArray paths;
                 for (const auto& f : fc.getResults()) paths.add(f.getFullPathName());
